@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenAI Image Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;1,100;1,300&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    body {
+        font-size: 16px;
+        line-height: 1;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: 'Poppins', sans-serif ;
+        --webkit-box-sizing: border-box;
+        margin: 0;
+        color: #5a5f69;
+        background: #2b2b2b;
+
+
+    }
+
+
+    .first {
+        width: 80%;
+        height: 40vh;
+        position: relative;
+        border-bottom-left-radius: 100px;
+        border-bottom-right-radius: 100px;
+        margin: auto;
+        box-shadow: /*0px 0px 50px 0 rgba(0, 0, 0, 0.7), 
+        /* 0px 0px 50px 0 rgba(44, 0, 0, 0.7), */
+        inset 0px 0px 3px 0 rgba(255, 255, 255, 0.5),
+        inset 0px 0px 3px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    .AiBannerSection_input_and_surpriseme_container__1GwlT {
+        position: relative;
+        bottom: 5%;
+        left: 20%;
+        width: 60%;
+        font-size: 16px;
+        line-height: 1;
+        align-items: center;
+        justify-content: center;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #5a5f69;
+        box-sizing: border-box;
+        /* height: 2rem; */
+        /* margin-bottom: 1rem; */
+        /* padding: 20% 10% 0% 0%; */
+    }
+
+
+    .AiBannerSection_input_container__1Zqqo {
+        font-size: 16px;
+        line-height: 1;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #5a5f69;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .5rem;
+        margin-bottom: .5rem;
+        background: rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(20px);
+        background-clip: padding-box, border-box;
+        background-origin: padding-box, border-box;
+        border: 1px solid transparent;
+        border-radius: .5rem;
+        box-shadow: 0px 0px 50px 0 rgba(0, 0, 0, 0.7),
+        0px 0px 50px 0 rgba(44, 0, 0, 0.7),
+        inset 0px 0px 3px 0 rgba(255, 255, 255, 0.5),
+        inset 0px 0px 3px 0 rgba(255, 255, 255, 0.5);
+
+    }
+
+    /* .AiBannerSection_input_container__1Zqqo :hover{
+        box-shadow: 10px 10px 10px yellowgreen;
+    } */
+
+    .AiBannerSection_input_container__1Zqqo input {
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        box-sizing: border-box;
+        width: 57.75rem;
+        padding: 0 .625rem;
+        margin-right: 1rem;
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 2.375rem;
+        color: #fff;
+        letter-spacing: 2px;
+        word-spacing: 5px;
+        background: transparent;
+        border: none;
+        outline: none;
+    }
+
+    .AiBannerSection_surprise_me__2K2y3 {
+        font-size: 16px;
+        line-height: 1;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #5a5f69;
+        box-sizing: border-box;
+        display: flex;
+        width: fit-content;
+        padding: .25rem .75rem;
+    }
+
+    .hover{
+       
+        border-radius: 10px;
+    }
+    .AiBannerSection_input_container__1Zqqo button {
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        box-sizing: border-box;
+        margin: 0;
+        font: inherit;
+        cursor: pointer;
+        border: 0;
+        outline: 0;
+        min-width: 6.25rem;
+        padding: 8px 10px;
+        font-size: 16xp;
+        font-weight: 600;
+        line-height: 1.375rem;
+        color: #2b2b2b;
+        background: #62ffb8;
+        border-radius: 4px;
+
+    }
+
+    svg {
+        font-size: 16px;
+        line-height: 1;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #5a5f69;
+        box-sizing: border-box;
+        fill: currentColor;
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: .25rem;
+    }
+
+    g {
+        font-size: 16px;
+        line-height: 1;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #5a5f69;
+        fill: currentColor;
+        clip-path: url("#three-star_svg__a");
+        box-sizing: border-box;
+    }
+
+    span {
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        font: inherit;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        outline: 0;
+        position: relative;
+    }
+
+    p {
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font: inherit;
+        cursor: pointer;
+        box-sizing: border-box;
+        padding: 0;
+        max-width: 50.875rem;
+        margin: 0;
+        font-size: .875rem;
+        font-weight: 300;
+        line-height: 1.375rem;
+        color: transparent;
+        text-align: center;
+        letter-spacing: .024375rem;
+        background: linear-gradient(77deg, #d6fa30 -1%, #5ce8fa 103%);
+        -webkit-background-clip: text;
+    }
+
+    .AiGallerySection_container__27LVw {
+        font-size: 16px;
+        line-height: 1;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        --webkit-box-sizing: border-box;
+        padding: 24px 73px;
+        background-color: #161619;
+        color: #ffffff;
+        border-bottom-left-radius: 100px;
+    }
+
+    .Container_container__3erG2_AiGallerySection_content-fra__3pobe {
+        font-size: 16px;
+        line-height: 1;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #ffffff;
+        box-sizing: content-box;
+        max-width: 1160px;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 0;
+
+    }
+
+    .Container_row__1l6HT_AiGallerySection_row__s_E17 {
+        font-size: 16px;
+        line-height: 1;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #ffffff;
+        --webkit-box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: 0;
+    }
+
+    .AiGallerySection_content-row-content__3R6qH {
+        font-size: 16px;
+        line-height: 1;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #ffffff;
+        --webkit-box-sizing: border-box;
+        padding: 25px 25px;
+        width: 100%;
+    }
+
+    .AiGallerySection_content-row-content__3R6qH h2 {
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        --webkit-box-sizing: border-box;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        font-weight: 500;
+        text-align: center;
+        letter-spacing: .39px;
+        font-size: 24px;
+        line-height: 36px;
+        color: #ffffff;
+    }
+
+    .AiGallerySection_minor-title__1ETxb {
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #ffffff;
+        --webkit-box-sizing: border-box;
+        margin: 16px 0;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 22px;
+        text-align: center;
+        letter-spacing: .39px;
+
+    }
+
+    .AiGallerySection_minor-title__1ETxb p {
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #ffffff;
+        font-weight: 300;
+        text-align: center;
+        --webkit-box-sizing: border-box;
+        font-size: 16px;
+        line-height: 1.8rem;
+        letter-spacing: .3px;
+        margin: auto;
+
+
+    }
+
+    .sec {
+        position: absolute;
+        display: block;
+       
+        width: 100%;
+        height: 100%;
+        background: #2b2b2b;
+        margin: auto;
+        margin-bottom: 10%;
+       overflow: auto-flow;
+    }
+
+        .imagecunt {
+        background: fixed;
+
+        display: grid;
+        position: absolute;
+        grid-template-columns: repeat(3, 350px);
+        
+        /* Adjust the width as needed */
+        grid-template-rows: repeat(2, 300px);
+        /* Adjust the height as needed */
+        /* gap: 10px; */
+        margin: 100px auto;
+        width: 160%;
+        justify-content: center;
+        align-items: center;
+
+        /* grid-template-columns: repeat(4, 1fr); */
+        gap: 10px;
+        /* margin-bottom: 10px; */
+        max-width: 100%;
+        margin-bottom: 20%;
+
+    }
+
+        .col-md-4 img{
+        max-width: 100%;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+       
+    }
+    
+      .col-md-4 img:hover {
+        
+        box-shadow: 4px 4px 50px 0 rgba(0, 0, 0, 0.7),
+        -4px 0px 50px 0 rgba(44, 0, 0, 0.7),
+        inset 0px 0px 6px 0 rgba(255, 255, 255, 0.5),
+        inset 0px 0px 6px 0 rgba(255, 255, 255, 0.5);
+        transform: scale(1.2) perspective(2500px) rotateY(5deg);
+    
+    }
+
+  @media (max-width: 750px) {
+    body {
+        font-size: 10px; /* Adjust font size for smaller screens */
+    }
+
+    .first {
+        width: 80%; /* Full width for smaller screens */
+        height: auto; /* Adjust height to auto for content */
+         border-bottom-left-radius: 100px;
+        border-bottom-right-radius: 100px;/* Remove border radius */
+        margin: auto; /* Remove margin */
+    }
+
+    .AiGallerySection_minor-title__1ETxb p {
+      font-size: 16px;
+      line-height: none;
+      word-spacing: none;
+    }
+
+    .AiGallerySection_title__5c3tm h2{
+      font-size:  24px ;
+      line-height: none;
+    }
+
+
+    .sec{
+       width:100%;
+       font-size:16px;
+
+
+     }
+   
+    
+    .AiBannerSection_input_container__1Zqqo button {
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        box-sizing: border-box;
+        margin: 0;
+        font: inherit;
+        cursor: pointer;
+        border: 0;
+        outline: 0;
+        min-width: 5.25rem;
+        padding: 12px 2px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 5px;
+        color: #2b2b2b;
+        background: #62ffb8;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .AiBannerSection_input_container__1Zqqo input {
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        box-sizing: border-box;
+        width: 37.75rem;
+        padding: 0 .625rem;
+        margin-right: 1rem;
+        font-size: 12px;
+        font-weight: 300;
+        line-height:5px;
+        color: #fff;
+        letter-spacing: 0px;
+        word-spacing: 0px;
+        background: transparent;
+        border: none;
+        outline: none;
+    }
+
+ }
+
+   @media (max-width: 500px) {
+    body {
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
+
+    .first {
+        width: 100%; /* Full width for smaller screens */
+        height: auto; /* Adjust height to auto for content */
+        border-radius:0;/* Remove border radius */
+        margin: 0; /* Remove margin */
+    }
+
+    .AiGallerySection_minor-title__1ETxb p {
+      font-size: 12px;
+      line-height: none;
+      word-spacing: none;
+    }
+
+    .AiGallerySection_content-row-content__3R6qH h2{
+      font-size:  14px ;
+      line-height: 20px;
+      word-spacing: 5px;
+    }
+
+
+
+    .sec{
+       width:100%;
+       font-size:12px;
+
+
+     }
+    
+      
+      .AiBannerSection_input_container__1Zqqo button {
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        box-sizing: border-box;
+        margin: 0;
+        font: inherit;
+        cursor: pointer;
+        border: 0;
+        outline: 0;
+        min-width: 3.25rem;
+        padding: 8px 2px;
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 2px;
+        color: #2b2b2b;
+        background: #62ffb8;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .AiBannerSection_input_container__1Zqqo input {
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        box-sizing: border-box;
+        width: 27.75rem;
+        padding: 0 .625rem;
+        margin-right: 1rem;
+        font-size: 10px;
+        font-weight: 300;
+        line-height:2px;
+        color: #fff;
+        letter-spacing: 0px;
+        word-spacing: 0px;
+        background: transparent;
+        border: none;
+        outline: none;
+    }
+
+
+    
+}
+ @media (max-width: 400px) {
+    body {
+        font-size: 8px; /* Adjust font size for smaller screens */
+    }
+
+    .first {
+        width: 100%; /* Full width for smaller screens */
+        height : auto; /* Adjust height to auto for content */
+        border-radius:0;/* Remove border radius */
+        margin: 0; /* Remove margin */
+    }
+    .AiGallerySection_minor-title__1ETxb p {
+      font-size: 10px;
+      line-height: 15px;
+      word-spacing: none;
+    }
+
+    .AiGallerySection_content-row-content__3R6qH h2{
+      font-size:  14px ;
+      line-height: 20px;
+      word-spacing: 5px;
+    }
+
+    .sec{ 
+        width: 100%;
+        font-size:10px 
+    }
+
+   .AiBannerSection_input_and_surpriseme_container__1GwlT {
+        position: relative;
+        bottom: 5%;
+        left: 0%;
+        width: 100%;
+        font-size: 16px;
+        line-height: 1;
+        align-items: center;
+        justify-content: center;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #5a5f69;
+        box-sizing: border-box;
+        
+    }
+    
+svg{
+        font-size: 10px;
+    }
+    span p{
+        font-size: 10px
+    }
+
+   
+
+}
+
+@media (max-width: 250px) {
+    body {
+        font-size: 8px; /* Adjust font size for smaller screens */
+    }
+
+    .first {
+        width: 100%; /* Full width for smaller screens */
+        height : auto; /* Adjust height to auto for content */
+        border-radius:0;/* Remove border radius */
+        margin: 0; /* Remove margin */
+    }
+    .AiGallerySection_minor-title__1ETxb p {
+      font-size: 8px;
+      line-height: 10px;
+      word-spacing: none;
+    }
+
+    .AiGallerySection_content-row-content__3R6qH h2{
+      font-size:  14px ;
+      line-height: 15px;
+      word-spacing: 15px;
+    }
+
+    .sec{ 
+        width: 100%;
+        font-size:8px 
+    }
+
+   .AiBannerSection_input_and_surpriseme_container__1GwlT {
+        position: relative;
+        bottom: 5%;
+        left: 0%;
+        width: 100%;
+        font-size: 16px;
+        line-height: 1;
+        align-items: center;
+        justify-content: center;
+        --animate-duration: 1s;
+        --animate-delay: 1s;
+        --animate-repeat: 1;
+        font-family: Poppins, helvetica, PingFang SC, Arial;
+        color: #5a5f69;
+        box-sizing: border-box;
+        /* height: 2rem; */
+        /* margin-bottom: 1rem; */
+        /* padding: 20% 10% 0% 0%; */
+    }
+  
+    svg{
+        display: none;
+    }
+    span p{
+        display: none;
+    }
+
+    
+.gen-form {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+}
+</style>
+
+<body>
+
+
+    <div class="main">
+
+
+
+        <section class="first" style=" background-color: #161619; color: #ffffff;"
+            class="AiGallerySection_container__27LVw">
+
+
+            <!-- <form>
+            <div class="mb-3">
+               
+                <input id="imgprompt" type="text" class="form-control" aria-describedby="emailHelp">
+               
+                <button id="submitbtn" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+         </form> -->
+
+            <dev>
+                <div class="Container_container__3erG2_AiGallerySection_content-fra__3pobe">
+                    <div class="Container_row__1l6HT_AiGallerySection_row__s_E17">
+                        <div class="AiGallerySection_content-row-content__3R6qH">
+                            <h2 style="color: #ffffff;" class="AiGallerySection_title__5c3tm">Text-to-Image: Free AI
+                                Image
+                                Generator</h2>
+                            <div class="AiGallerySection_minor-title__1ETxb">
+                                <p>Capture your thoughts and bring your ideas to life with Dalle AI picture generator
+                                    from
+                                    text! Simply input your image keywords in the box or choose from our default text
+                                    prompts to
+                                    enrich your image description and get the perfect result. With Dalle AI photo
+                                    generator
+                                    app, creating artistic works is easier than ever before. </p>
+                            </div>
+                        </div>
+
+            </div>
+
+
+
+        </section>
+
+
+        <section class="sec">
+
+            <dev class="search">
+            
+                  <div class="AiBannerSection_input_and_surpriseme_container__1GwlT">
+                    <div class="hover">
+                    <div class="AiBannerSection_input_container__1Zqqo"><input
+                            placeholder="Enter Your prompt to Generate image." id="imgprompt" type="text"
+                            value=""><button id="submitbtn" type="submit">Generate</button></div>
+                   </div>
+                    <div class="AiBannerSection_surprise_me__2K2y3"><svg fill="none" width="24" height="24">
+                            <defs>
+                                <clipPath id="three-star_svg__a">
+                                    <rect width="24" height="24" rx="0"></rect>
+                                </clipPath>
+                            </defs>
+                            <g style="mix-blend-mode: passthrough;" clip-path="url(#three-star_svg__a)">
+                                <path d="M7.5 6l1.94 3.56L13 11.5l-3.56 1.94L7.5 17l-1.94-3.56L2 11.5l3.56-1.94L7.5 6z"
+                                    fill="#62FFB8"></path>
+                                <path
+                                    d="M17 13l1.411 2.589L21 17l-2.589 1.411L17 21l-1.411-2.589L13 17l2.589-1.411L17 13z"
+                                    fill="#FFF"></path>
+                                <path d="M15 2l1.059 1.941L18 5l-1.941 1.059L15 8l-1.059-1.941L12 5l1.941-1.059L15 2z"
+                                    fill="#D1FB7D"></path>
+                            </g>
+                        </svg><span>
+                            <p>simple Prompts</p>
+                        </span></div>
+                </div>
+            </dev>
+
+            <div class="container my-4">
+                <div class="svgContainer d-flex">
+    
+    <svg class="d-none" id="loadingGif" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto; background:transparent; color:white;" width="400px" height="400px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<g transform="rotate(0 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="8" height="8" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.9166666666666666s" repeatCount="indefinite"></animate>
+  </rect>
+</g><g transform="rotate(30 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.8333333333333334s" repeatCount="indefinite"></animate>
+  </rect>
+</g><g transform="rotate(60 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.75s" repeatCount="indefinite"></animate>
+  </rect>
+</g><g transform="rotate(90 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.6666666666666666s" repeatCount="indefinite"></animate>
+  </rect>
+</g><g transform="rotate(120 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5833333333333334s" repeatCount="indefinite"></animate>
+  </rect>
+</g><g transform="rotate(150 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5s" repeatCount="indefinite"></animate>
+  </rect>
+</g><g transform="rotate(180 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.4166666666666667s" repeatCount="indefinite"></animate>
+  </rect>
+</g><g transform="rotate(210 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.3333333333333333s" repeatCount="indefinite"></animate>
+  </rect>
+</g><g transform="rotate(240 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.25s" repeatCount="indefinite"></animate>
+  </rect>
+</g><g transform="rotate(270 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.16666666666666666s" repeatCount="indefinite"></animate>
+  </rect>
+</g><g transform="rotate(300 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.08333333333333333s" repeatCount="indefinite"></animate>
+  </rect>
+</g><g transform="rotate(330 50 50)">
+  <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#000000">
+    <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animate>
+  </rect>
+</g>
+</svg>
+      </div>
+           <div class="row imageCont">
+             
+           </div>
+
+        </section>
+
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script>
+
+        submitbtn.addEventListener("click", (e) => {
+            loadingGif.classList.toggle("d-none")
+            e.preventDefault();
+            const promptTxt = imgprompt.value;
+            fetch("/generateimages/" + promptTxt)
+                .then(response => response.json())
+                .then(data => {
+                    loadingGif.classList.toggle("d-none")
+                    console.log(data);
+                    const images = data.data;
+                    const container = document.querySelector(".imageCont");
+                    let totalHtml = "";
+
+
+                    images.forEach(image => {
+                        let html = `<div class="col-md-4 my-2">
+            <img width="340" src="${image.url}" class="img-responsive">
+        </div>`;
+                        totalHtml += html;
+
+                    });
+                    container.innerHTML = totalHtml;
+                });
+
+        })
+    </script>
+</body>
+
+</html>
