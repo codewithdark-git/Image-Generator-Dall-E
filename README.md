@@ -57,9 +57,9 @@ Ensure that you have a valid OpenAI API key and set it in the `config.py` file.
 
 ## Author
 
-Github : Codewithdark-git
-Facebook : codewithdark.fb
-Replit : codewithdarkrep
+Twitter: @YourTwitterHandle
+LinkedIn: Your LinkedIn Profile
+Email: your.email@example.com
 
 ## License
 
