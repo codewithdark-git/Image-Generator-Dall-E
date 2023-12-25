@@ -56,10 +56,7 @@ The generated images will be displayed on the home page or as specified in your 
 Ensure that you have a valid OpenAI API key and set it in the `config.py` file.
 
 ## Author
-
-Twitter: @YourTwitterHandle
-LinkedIn: Your LinkedIn Profile
-Email: your.email@example.com
+@codewithdark-git
 
 ## License
 
