@@ -25,7 +25,7 @@ This Flask app allows you to generate images using the OpenAI API based on a giv
 4. Run the Flask app:
 
     ```bash
-    python main.py
+    python bot.py
     ```
 
     The app will be accessible at `http://127.0.0.1:5000/` in your web browser.
